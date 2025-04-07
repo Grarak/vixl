@@ -291,14 +291,6 @@ class RawLiteral : public Location {
   static const int kLiteralAlignment = 4;
 
  public:
-  enum PlacementPolicy { kPlacedWhenUsed, kManuallyPlaced };
-
-  enum DeletionPolicy {
-    kDeletedOnPlacementByPool,
-    kDeletedOnPoolDestruction,
-    kManuallyDeleted
-  };
-
   RawLiteral(const void* addr,
              int size,
              PlacementPolicy placement_policy = kPlacedWhenUsed,

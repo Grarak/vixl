@@ -45,60 +45,7 @@ const InstructionSet kDefaultISA = T32;
 const InstructionSet kDefaultISA = A32;
 #endif
 
-const unsigned kRegSizeInBits = 32;
-const unsigned kRegSizeInBytes = kRegSizeInBits / 8;
-const unsigned kSRegSizeInBits = 32;
-const unsigned kSRegSizeInBytes = kSRegSizeInBits / 8;
-const unsigned kDRegSizeInBits = 64;
-const unsigned kDRegSizeInBytes = kDRegSizeInBits / 8;
-const unsigned kQRegSizeInBits = 128;
-const unsigned kQRegSizeInBytes = kQRegSizeInBits / 8;
-
-const unsigned kNumberOfRegisters = 16;
-const unsigned kNumberOfSRegisters = 32;
-const unsigned kMaxNumberOfDRegisters = 32;
-const unsigned kNumberOfQRegisters = 16;
-const unsigned kNumberOfT32LowRegisters = 8;
-
-const unsigned kIpCode = 12;
-const unsigned kSpCode = 13;
-const unsigned kLrCode = 14;
-const unsigned kPcCode = 15;
-
-const unsigned kT32PcDelta = 4;
-const unsigned kA32PcDelta = 8;
-
-const unsigned kRRXEncodedValue = 3;
-
-const unsigned kCoprocMask = 0xe;
-const unsigned kInvalidCoprocMask = 0xa;
-
-const unsigned kLowestT32_32Opcode = 0xe8000000;
-
-const uint32_t kUnknownValue = 0xdeadbeef;
-
-const uint32_t kMaxInstructionSizeInBytes = 4;
-const uint32_t kA32InstructionSizeInBytes = 4;
-const uint32_t k32BitT32InstructionSizeInBytes = 4;
-const uint32_t k16BitT32InstructionSizeInBytes = 2;
-
-// Maximum size emitted by a single T32 unconditional macro-instruction.
-const uint32_t kMaxT32MacroInstructionSizeInBytes = 32;
-
-const uint32_t kCallerSavedRegistersMask = 0x500f;
-
-const uint16_t k16BitT32NopOpcode = 0xbf00;
-const uint16_t kCbzCbnzMask = 0xf500;
-const uint16_t kCbzCbnzValue = 0xb100;
-
-const int32_t kCbzCbnzRange = 126;
-const int32_t kBConditionalNarrowRange = 254;
-const int32_t kBNarrowRange = 2046;
-const int32_t kNearLabelRange = kBNarrowRange;
-
 enum SystemFunctionsOpcodes { kPrintfCode };
-
-enum BranchHint { kNear, kFar, kBranchWithoutHint };
 
 // Start of generated code.
 // AArch32 version implemented by the library (v8.0).

@@ -68,7 +68,7 @@ void LiteralPool::Reset() {
   std::vector<RawLiteral*>::iterator it, end;
   for (it = entries_.begin(), end = entries_.end(); it != end; ++it) {
     RawLiteral* literal = *it;
-    if (literal->deletion_policy_ == RawLiteral::kDeletedOnPlacementByPool) {
+    if (literal->deletion_policy_ == kDeletedOnPlacementByPool) {
       delete literal;
     }
   }
@@ -1571,7 +1571,7 @@ void MacroAssembler::Fmov(VRegister vd, double imm) {
     ldr(vd,
         new Literal<double>(imm,
                             &literal_pool_,
-                            RawLiteral::kDeletedOnPlacementByPool));
+                            kDeletedOnPlacementByPool));
   } else {
     // TODO: consider NEON support for load literal.
     Movi(vd, rawbits);
@@ -1607,7 +1607,7 @@ void MacroAssembler::Fmov(VRegister vd, float imm) {
     ldr(vd,
         new Literal<float>(imm,
                            &literal_pool_,
-                           RawLiteral::kDeletedOnPlacementByPool));
+                           kDeletedOnPlacementByPool));
   } else {
     // TODO: consider NEON support for load literal.
     Movi(vd, rawbits);

@@ -42,24 +42,6 @@ namespace vixl {
 namespace aarch32 {
 
 
-bool Shift::IsValidAmount(uint32_t amount) const {
-  switch (GetType()) {
-    case LSL:
-      return amount <= 31;
-    case ROR:
-      return (amount > 0) && (amount <= 31);
-    case LSR:
-    case ASR:
-      return (amount > 0) && (amount <= 32);
-    case RRX:
-      return amount == 0;
-    default:
-      VIXL_UNREACHABLE();
-      return false;
-  }
-}
-
-
 std::ostream& operator<<(std::ostream& os, const Register reg) {
   switch (reg.GetCode()) {
     case 12:
@@ -73,32 +55,6 @@ std::ostream& operator<<(std::ostream& os, const Register reg) {
     default:
       return os << "r" << reg.GetCode();
   }
-}
-
-
-SRegister VRegister::S() const {
-  VIXL_ASSERT(GetType() == kSRegister);
-  return SRegister(GetCode());
-}
-
-
-DRegister VRegister::D() const {
-  VIXL_ASSERT(GetType() == kDRegister);
-  return DRegister(GetCode());
-}
-
-
-QRegister VRegister::Q() const {
-  VIXL_ASSERT(GetType() == kQRegister);
-  return QRegister(GetCode());
-}
-
-
-Register RegisterList::GetFirstAvailableRegister() const {
-  if (list_ == 0) {
-    return Register();
-  }
-  return Register(CountTrailingZeros(list_));
 }
 
 
@@ -205,86 +161,6 @@ std::ostream& operator<<(std::ostream& os, NeonRegisterList nreglist) {
 }
 
 
-const char* SpecialRegister::GetName() const {
-  switch (reg_) {
-    case APSR:
-      return "APSR";
-    case SPSR:
-      return "SPSR";
-  }
-  VIXL_UNREACHABLE();
-  return "??";
-}
-
-
-const char* MaskedSpecialRegister::GetName() const {
-  switch (reg_) {
-    case APSR_nzcvq:
-      return "APSR_nzcvq";
-    case APSR_g:
-      return "APSR_g";
-    case APSR_nzcvqg:
-      return "APSR_nzcvqg";
-    case CPSR_c:
-      return "CPSR_c";
-    case CPSR_x:
-      return "CPSR_x";
-    case CPSR_xc:
-      return "CPSR_xc";
-    case CPSR_sc:
-      return "CPSR_sc";
-    case CPSR_sx:
-      return "CPSR_sx";
-    case CPSR_sxc:
-      return "CPSR_sxc";
-    case CPSR_fc:
-      return "CPSR_fc";
-    case CPSR_fx:
-      return "CPSR_fx";
-    case CPSR_fxc:
-      return "CPSR_fxc";
-    case CPSR_fsc:
-      return "CPSR_fsc";
-    case CPSR_fsx:
-      return "CPSR_fsx";
-    case CPSR_fsxc:
-      return "CPSR_fsxc";
-    case SPSR_c:
-      return "SPSR_c";
-    case SPSR_x:
-      return "SPSR_x";
-    case SPSR_xc:
-      return "SPSR_xc";
-    case SPSR_s:
-      return "SPSR_s";
-    case SPSR_sc:
-      return "SPSR_sc";
-    case SPSR_sx:
-      return "SPSR_sx";
-    case SPSR_sxc:
-      return "SPSR_sxc";
-    case SPSR_f:
-      return "SPSR_f";
-    case SPSR_fc:
-      return "SPSR_fc";
-    case SPSR_fx:
-      return "SPSR_fx";
-    case SPSR_fxc:
-      return "SPSR_fxc";
-    case SPSR_fs:
-      return "SPSR_fs";
-    case SPSR_fsc:
-      return "SPSR_fsc";
-    case SPSR_fsx:
-      return "SPSR_fsx";
-    case SPSR_fsxc:
-      return "SPSR_fsxc";
-  }
-  VIXL_UNREACHABLE();
-  return "??";
-}
-
-
 const char* BankedRegister::GetName() const {
   switch (reg_) {
     case R8_usr:
@@ -358,82 +234,6 @@ const char* BankedRegister::GetName() const {
   return "??";
 }
 
-const char* SpecialFPRegister::GetName() const {
-  switch (reg_) {
-    case FPSID:
-      return "FPSID";
-    case FPSCR:
-      return "FPSCR";
-    case MVFR2:
-      return "MVFR2";
-    case MVFR1:
-      return "MVFR1";
-    case MVFR0:
-      return "MVFR0";
-    case FPEXC:
-      return "FPEXC";
-  }
-  VIXL_UNREACHABLE();
-  return "??";
-}
-
-
-const char* Condition::GetName() const {
-  switch (condition_) {
-    case eq:
-      return "eq";
-    case ne:
-      return "ne";
-    case cs:
-      return "cs";
-    case cc:
-      return "cc";
-    case mi:
-      return "mi";
-    case pl:
-      return "pl";
-    case vs:
-      return "vs";
-    case vc:
-      return "vc";
-    case hi:
-      return "hi";
-    case ls:
-      return "ls";
-    case ge:
-      return "ge";
-    case lt:
-      return "lt";
-    case gt:
-      return "gt";
-    case le:
-      return "le";
-    case al:
-      return "";
-    case Condition::kNone:
-      return "";
-  }
-  return "<und>";
-}
-
-
-const char* Shift::GetName() const {
-  switch (shift_) {
-    case LSL:
-      return "lsl";
-    case LSR:
-      return "lsr";
-    case ASR:
-      return "asr";
-    case ROR:
-      return "ror";
-    case RRX:
-      return "rrx";
-  }
-  VIXL_UNREACHABLE();
-  return "??";
-}
-
 
 const char* EncodingSize::GetName() const {
   switch (size_) {
@@ -442,102 +242,6 @@ const char* EncodingSize::GetName() const {
       return "";
     case Wide:
       return ".w";
-  }
-  VIXL_UNREACHABLE();
-  return "??";
-}
-
-
-const char* DataType::GetName() const {
-  switch (value_) {
-    case kDataTypeValueInvalid:
-      return ".??";
-    case kDataTypeValueNone:
-      return "";
-    case S8:
-      return ".s8";
-    case S16:
-      return ".s16";
-    case S32:
-      return ".s32";
-    case S64:
-      return ".s64";
-    case U8:
-      return ".u8";
-    case U16:
-      return ".u16";
-    case U32:
-      return ".u32";
-    case U64:
-      return ".u64";
-    case F16:
-      return ".f16";
-    case F32:
-      return ".f32";
-    case F64:
-      return ".f64";
-    case I8:
-      return ".i8";
-    case I16:
-      return ".i16";
-    case I32:
-      return ".i32";
-    case I64:
-      return ".i64";
-    case P8:
-      return ".p8";
-    case P64:
-      return ".p64";
-    case Untyped8:
-      return ".8";
-    case Untyped16:
-      return ".16";
-    case Untyped32:
-      return ".32";
-    case Untyped64:
-      return ".64";
-  }
-  VIXL_UNREACHABLE();
-  return ".??";
-}
-
-
-const char* MemoryBarrier::GetName() const {
-  switch (type_) {
-    case OSHLD:
-      return "oshld";
-    case OSHST:
-      return "oshst";
-    case OSH:
-      return "osh";
-    case NSHLD:
-      return "nshld";
-    case NSHST:
-      return "nshst";
-    case NSH:
-      return "nsh";
-    case ISHLD:
-      return "ishld";
-    case ISHST:
-      return "ishst";
-    case ISH:
-      return "ish";
-    case LD:
-      return "ld";
-    case ST:
-      return "st";
-    case SY:
-      return "sy";
-  }
-  switch (static_cast<int>(type_)) {
-    case 0:
-      return "#0x0";
-    case 4:
-      return "#0x4";
-    case 8:
-      return "#0x8";
-    case 0xc:
-      return "#0xc";
   }
   VIXL_UNREACHABLE();
   return "??";

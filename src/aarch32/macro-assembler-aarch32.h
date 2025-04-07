@@ -44,8 +44,6 @@ namespace aarch32 {
 
 class UseScratchRegisterScope;
 
-enum FlagsUpdate { LeaveFlags = 0, SetFlags = 1, DontCare = 2 };
-
 // We use a subclass to access the protected `ExactAssemblyScope` constructor
 // giving us control over the pools, and make the constructor private to limit
 // usage to code paths emitting pools.
@@ -768,7 +766,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
     VIXL_ASSERT(allow_macro_instructions_);
     VIXL_ASSERT(OutsideITBlock());
     RawLiteral* literal =
-        new Literal<uint32_t>(v, RawLiteral::kDeletedOnPlacementByPool);
+        new Literal<uint32_t>(v, kDeletedOnPlacementByPool);
     Ldr(cond, rt, literal);
   }
   template <typename T>
@@ -783,7 +781,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
     VIXL_ASSERT(allow_macro_instructions_);
     VIXL_ASSERT(OutsideITBlock());
     RawLiteral* literal =
-        new Literal<uint64_t>(v, RawLiteral::kDeletedOnPlacementByPool);
+        new Literal<uint64_t>(v, kDeletedOnPlacementByPool);
     Ldrd(cond, rt, rt2, literal);
   }
   template <typename T>
@@ -796,7 +794,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
     VIXL_ASSERT(allow_macro_instructions_);
     VIXL_ASSERT(OutsideITBlock());
     RawLiteral* literal =
-        new Literal<float>(v, RawLiteral::kDeletedOnPlacementByPool);
+        new Literal<float>(v, kDeletedOnPlacementByPool);
     Vldr(cond, rd, literal);
   }
   void Vldr(SRegister rd, float v) { Vldr(al, rd, v); }
@@ -806,7 +804,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
     VIXL_ASSERT(allow_macro_instructions_);
     VIXL_ASSERT(OutsideITBlock());
     RawLiteral* literal =
-        new Literal<double>(v, RawLiteral::kDeletedOnPlacementByPool);
+        new Literal<double>(v, kDeletedOnPlacementByPool);
     Vldr(cond, rd, literal);
   }
   void Vldr(DRegister rd, double v) { Vldr(al, rd, v); }
