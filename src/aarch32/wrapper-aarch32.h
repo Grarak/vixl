@@ -812,10 +812,8 @@ class Operand {
   // where <immediate> is uint32_t.
   // This is allowed to be an implicit constructor because Operand is
   // a wrapper class that doesn't normally perform any type conversion.
-  Operand(uint32_t immediate)  // NOLINT(runtime/explicit)
-      : imm_(immediate), rm_(NoReg), shift_(LSL), amount_(0), rs_(NoReg) {}
-  Operand(int32_t immediate)  // NOLINT(runtime/explicit)
-      : imm_(immediate), rm_(NoReg), shift_(LSL), amount_(0), rs_(NoReg) {}
+  Operand(uint32_t immediate);
+  Operand(int32_t immediate);
 
   // rm
   // where rm is the base register

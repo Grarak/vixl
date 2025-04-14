@@ -258,7 +258,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
   // be 2 bytes for T32.
   explicit MacroAssembler(InstructionSet isa = kDefaultISA)
       : Assembler(isa),
-        available_(r12),
+        available_(0),
         current_scratch_scope_(NULL),
         pool_manager_(4 /*header_size*/,
                       4 /*alignment*/,
@@ -274,7 +274,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
   }
   explicit MacroAssembler(size_t size, InstructionSet isa = kDefaultISA)
       : Assembler(size, isa),
-        available_(r12),
+        available_(0),
         current_scratch_scope_(NULL),
         pool_manager_(4 /*header_size*/,
                       4 /*alignment*/,
@@ -288,7 +288,7 @@ class MacroAssembler : public Assembler, public MacroAssemblerInterface {
   }
   MacroAssembler(byte* buffer, size_t size, InstructionSet isa = kDefaultISA)
       : Assembler(buffer, size, isa),
-        available_(r12),
+        available_(0),
         current_scratch_scope_(NULL),
         pool_manager_(4 /*header_size*/,
                       4 /*alignment*/,

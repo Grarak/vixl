@@ -636,6 +636,12 @@ void MemOperand::CheckShift() {
 #endif
 }
 
+Operand::Operand(uint32_t immediate)
+    : imm_(immediate), rm_(NoReg), shift_(LSL), amount_(0), rs_(NoReg) {}
+
+Operand::Operand(int32_t immediate)
+    : imm_(immediate), rm_(NoReg), shift_(LSL), amount_(0), rs_(NoReg) {}
+
 Operand::Operand(Register rm)
     : imm_(0), rm_(rm), shift_(LSL), amount_(0), rs_(NoReg) {
   VIXL_ASSERT(rm_.IsValid());
