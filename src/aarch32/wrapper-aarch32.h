@@ -918,6 +918,7 @@ struct Aarch32MacroAssembler;
 Aarch32MacroAssembler* create_aarch32_masm();
 void masm_bind(Aarch32MacroAssembler* masm, Aarch32Label* label);
 void masm_finalize(Aarch32MacroAssembler* masm);
+uint32_t masm_get_cursor_offset(Aarch32MacroAssembler* masm);
 const uint8_t* masm_get_start_address(const Aarch32MacroAssembler* masm);
 uint32_t masm_get_size_of_code_generated(const Aarch32MacroAssembler* masm);
 void destroy_aarch32_masm(Aarch32MacroAssembler* masm);

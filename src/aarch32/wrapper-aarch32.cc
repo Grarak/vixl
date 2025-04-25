@@ -745,6 +745,9 @@ void masm_bind(Aarch32MacroAssembler* masm, Aarch32Label* label) {
   masm->Bind(label);
 }
 void masm_finalize(Aarch32MacroAssembler* masm) { masm->FinalizeCode(); }
+uint32_t masm_get_cursor_offset(Aarch32MacroAssembler* masm) {
+  return masm->GetCursorOffset();
+}
 const uint8_t* masm_get_start_address(const Aarch32MacroAssembler* masm) {
   return masm->GetBuffer().GetStartAddress<const uint8_t*>();
 }
