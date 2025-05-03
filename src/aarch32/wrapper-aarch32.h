@@ -54,6 +54,8 @@ const int32_t kBConditionalNarrowRange = 254;
 const int32_t kBNarrowRange = 2046;
 const int32_t kNearLabelRange = kBNarrowRange;
 
+enum InstructionSet { A32, T32 };
+
 enum FlagsUpdate { LeaveFlags = 0, SetFlags = 1, DontCare = 2 };
 
 enum BranchHint { kNear, kFar, kBranchWithoutHint };
@@ -915,7 +917,7 @@ Aarch32SOperand* create_aarch32_soperand();
 void destroy_aarch32_soperand();
 
 struct Aarch32MacroAssembler;
-Aarch32MacroAssembler* create_aarch32_masm();
+Aarch32MacroAssembler* create_aarch32_masm(InstructionSet isa);
 void masm_bind(Aarch32MacroAssembler* masm, Aarch32Label* label);
 void masm_finalize(Aarch32MacroAssembler* masm);
 uint32_t masm_get_cursor_offset(Aarch32MacroAssembler* masm);

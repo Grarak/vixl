@@ -19,7 +19,10 @@ struct Aarch32Label : vixl::aarch32::Label {
   Aarch32Label(int32_t offset) : vixl::aarch32::Label(offset) {}
 };
 
-struct Aarch32MacroAssembler : vixl::aarch32::MacroAssembler {};
+struct Aarch32MacroAssembler : vixl::aarch32::MacroAssembler {
+  Aarch32MacroAssembler(InstructionSet isa)
+      : vixl::aarch32::MacroAssembler(isa) {}
+};
 
 struct Aarch32DOperand : vixl::aarch32::DOperand {
   Aarch32DOperand(int32_t immediate) : vixl::aarch32::DOperand(immediate) {}

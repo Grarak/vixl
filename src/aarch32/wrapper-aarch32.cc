@@ -738,8 +738,8 @@ Aarch32Label* create_aarch32_label(int32_t offset) {
 }
 void destroy_aarch32_label(Aarch32Label* label) { delete label; }
 
-Aarch32MacroAssembler* create_aarch32_masm() {
-  return new Aarch32MacroAssembler();
+Aarch32MacroAssembler* create_aarch32_masm(InstructionSet isa) {
+  return new Aarch32MacroAssembler(isa);
 }
 void masm_bind(Aarch32MacroAssembler* masm, Aarch32Label* label) {
   masm->Bind(label);

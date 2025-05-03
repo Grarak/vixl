@@ -33,12 +33,12 @@ extern "C" {
 }
 
 #include "globals-vixl.h"
+#include "wrapper-aarch32.h"
 
 
 namespace vixl {
 namespace aarch32 {
 
-enum InstructionSet { A32, T32 };
 #ifdef VIXL_INCLUDE_TARGET_T32_ONLY
 const InstructionSet kDefaultISA = T32;
 #else
