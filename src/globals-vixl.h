@@ -120,25 +120,26 @@ struct Unsigned<64> {
     }                                                        \
   } while (false)
 #else
-#define VIXL_ABORT()                                         \
-  do {                                                       \
-    printf("Aborting in %s, line %i\n", __FILE__, __LINE__); \
-    abort();                                                 \
+#define VIXL_ABORT()                                                  \
+  do {                                                                \
+    fprintf(stderr, "Aborting in %s, line %i\n", __FILE__, __LINE__); \
+    abort();                                                          \
   } while (false)
-#define VIXL_ABORT_WITH_MSG(msg)                             \
-  do {                                                       \
-    printf("%sin %s, line %i\n", (msg), __FILE__, __LINE__); \
-    abort();                                                 \
+#define VIXL_ABORT_WITH_MSG(msg)                                      \
+  do {                                                                \
+    fprintf(stderr, "%sin %s, line %i\n", (msg), __FILE__, __LINE__); \
+    abort();                                                          \
   } while (false)
-#define VIXL_CHECK(condition)                           \
-  do {                                                  \
-    if (!(condition)) {                                 \
-      printf("Assertion failed (%s)\nin %s, line %i\n", \
-             #condition,                                \
-             __FILE__,                                  \
-             __LINE__);                                 \
-      abort();                                          \
-    }                                                   \
+#define VIXL_CHECK(condition)                            \
+  do {                                                   \
+    if (!(condition)) {                                  \
+      fprintf(stderr,                                    \
+              "Assertion failed (%s)\nin %s, line %i\n", \
+              #condition,                                \
+              __FILE__,                                  \
+              __LINE__);                                 \
+      abort();                                           \
+    }                                                    \
   } while (false)
 #endif
 #ifdef VIXL_DEBUG
