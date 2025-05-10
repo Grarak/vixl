@@ -28,6 +28,7 @@
 #ifndef VIXL_COMPILER_INTRINSICS_H
 #define VIXL_COMPILER_INTRINSICS_H
 
+#include <climits>
 #include <limits.h>
 
 #include "globals-vixl.h"
