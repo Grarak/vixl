@@ -923,6 +923,7 @@ void masm_finalize(Aarch32MacroAssembler* masm);
 uint32_t masm_get_cursor_offset(Aarch32MacroAssembler* masm);
 const uint8_t* masm_get_start_address(const Aarch32MacroAssembler* masm);
 uint32_t masm_get_size_of_code_generated(const Aarch32MacroAssembler* masm);
+void masm_ensure_emit_for(Aarch32MacroAssembler* masm, uint32_t size);
 void destroy_aarch32_masm(Aarch32MacroAssembler* masm);
 
 #endif
